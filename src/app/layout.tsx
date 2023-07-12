@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -6,7 +7,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Atlan",
+  title: "SQL",
   description: "Run SQL queries on web",
 };
 
@@ -23,6 +24,7 @@ export default function RootLayout({
           inter.className
         )}
       >
+        <Navbar />
         <main>{children}</main>
       </body>
     </html>
