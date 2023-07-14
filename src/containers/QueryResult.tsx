@@ -1,8 +1,8 @@
 import React from "react";
 import useQueryData from "@/hooks/useQueryData";
-import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@/components/ui/Button";
 import { Download, Timer } from "lucide-react";
+import Table from "@/components/ui/Table";
 
 interface QueryResultProps {
   query: string;
@@ -18,9 +18,10 @@ export default function QueryResult({ query }: QueryResultProps) {
       width: 150,
     };
   });
+
   return (
     <div
-      style={{ height: 500, width: "100%", padding: "18px 30px 18px 30px" }}
+      style={{ width: "100%", padding: "18px 30px 18px 30px" }}
       className="bg-slate-100 rounded-md"
     >
       <div
@@ -38,8 +39,8 @@ export default function QueryResult({ query }: QueryResultProps) {
           </Button>
         </div>
       </div>
-      <div style={{ height: 400 }}>
-        <DataGrid rows={data} columns={columns} className="bg-white" />
+      <div>
+        <Table rows={data} columns={columns} className="bg-white" />
       </div>
     </div>
   );

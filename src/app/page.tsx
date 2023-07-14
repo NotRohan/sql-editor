@@ -1,7 +1,5 @@
 import DbConnectivityStatus from "@/components/DbConnectivityStatus";
-import { Input } from "@/components/ui/Input";
 import EditorTab from "@/containers/EditorTab";
-import { Button } from "@/ui/Button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/Tabs";
 
 export default function Home() {

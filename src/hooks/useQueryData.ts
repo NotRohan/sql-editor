@@ -22,7 +22,6 @@ const useQueryData = (query: string) => {
       ...row,
       id: `${index + 1}`,
     }));
-    console.log(structuredData)
     return structuredData;
   };
   

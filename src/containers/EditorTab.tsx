@@ -9,9 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Copy, Share2, PlayCircle } from "lucide-react";
 import QueryResult from "./QueryResult";
 
-type Props = {};
-
-export default function EditorTab({}: Props) {
+export default function EditorTab() {
   const [query, setQuery] = useState<string>("");
   const [editorValue, setEditorValue] = useState<string>("select * from categories");
 
