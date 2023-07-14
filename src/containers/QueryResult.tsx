@@ -1,15 +1,17 @@
+'use client'
+
 import React from "react";
-import useQueryData from "@/hooks/useQueryData";
 import { Button } from "@/components/ui/Button";
 import { Download, Timer } from "lucide-react";
 import Table from "@/components/ui/Table";
+import { GridValidRowModel } from "@mui/x-data-grid";
 
 interface QueryResultProps {
-  query: string;
+  data: GridValidRowModel[];
+  queryRuntime: string;
 }
 
-export default function QueryResult({ query }: QueryResultProps) {
-  const { data, error, queryRuntime } = useQueryData(query);
+export default function QueryResult({ data, queryRuntime }: QueryResultProps) {
   const columnNames = data.length > 0 ? Object.keys(data[0]) : [];
   const columns = columnNames.map((column) => {
     return {
