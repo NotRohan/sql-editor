@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.0",
+    "@mui/x-data-grid": "^6.10.0",
+    "@radix-ui/react-tabs": "^1.0.4",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
@@ -19,11 +24,16 @@
     "eslint-config-next": "13.4.9",
     "lucide-react": "^0.259.0",
     "next": "13.4.9",
+    "papaparse": "^5.4.1",
     "postcss": "8.4.25",
     "react": "18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^1.13.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.3.7"
   }
 }
