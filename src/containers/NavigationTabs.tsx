@@ -6,7 +6,11 @@ import { useState } from "react";
 import EditorTab from "./EditorTab";
 import HistoryList from "./HistoryList";
 import TableDetails from "./TableDetails";
-
+import dynamic from 'next/dynamic'
+ 
+const DynamicEditor = dynamic(() => import('./EditorTab'), {
+  ssr: false,
+})
 type Props = {};
 
 export default function NavigationTabs({}: Props) {
@@ -35,7 +39,7 @@ export default function NavigationTabs({}: Props) {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="Editor">
-        <EditorTab
+        <DynamicEditor
           data={data}
           queryRuntime={queryRuntime}
           editorValue={editorValue}
