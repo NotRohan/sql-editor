@@ -7,27 +7,6 @@ import EditorTab from "./EditorTab";
 import HistoryList from "./HistoryList";
 import TableDetails from "./TableDetails";
 
-const queryHistory = [
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-  { query: "SELECT * FROM users;", timestamp: new Date() },
-];
-
 type Props = {};
 
 export default function NavigationTabs({}: Props) {
@@ -74,7 +53,12 @@ export default function NavigationTabs({}: Props) {
         />
       </TabsContent>
       <TabsContent value="History">
-        <HistoryList items={queryHistory} />
+        <HistoryList
+          setData={setData}
+          setQueryRuntime={setQueryRuntime}
+          setTabValue={setTabValue}
+          setEditorValue={setEditorValue}
+        />
       </TabsContent>
     </Tabs>
   );
