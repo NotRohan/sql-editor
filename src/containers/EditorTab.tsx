@@ -66,6 +66,10 @@ export default function EditorTab({
           enableLiveAutocompletion: true,
           enableSnippets: true,
         }}
+        onLoad={(editor) => {
+          // @ts-expect-error
+          editor.textInput.getElement().ariaLabel = "editorTextarea";
+        }}
         value={editorValue}
         onChange={setEditorValue}
       />
@@ -92,10 +96,10 @@ export default function EditorTab({
             <DropdownMenuItem>AI Query Builder</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button variant="outline" className="mr-3" size="sm">
+        <Button variant="outline" className="mr-3" size="sm" aria-label="copy">
           <Copy className="w-4 h-4" />
         </Button>
-        <Button variant="outline" className="mr-3" size="sm">
+        <Button variant="outline" className="mr-3" size="sm" aria-label="share">
           <Share2 className="w-4 h-4" />
         </Button>
         <Button onClick={onSubmit} isLoading={isDataLoading}>
