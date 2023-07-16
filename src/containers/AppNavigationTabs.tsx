@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/Tabs";
 import { GridValidRowModel } from "@mui/x-data-grid";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import HistoryList from "./HistoryList";
 import TableDetails from "./TableDetails";
 
@@ -27,7 +28,8 @@ export default function AppNavigationTabs() {
     let t0 = performance.now();
     const response = await getCsvDataByTableName(tableName);
     if (response.error === true) {
-      // show toast here
+      toast.error('Error fetching table data')
+      setIsDataLoading(false);
       return;
     }
     let t1 = performance.now();

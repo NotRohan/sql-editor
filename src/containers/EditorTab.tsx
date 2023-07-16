@@ -17,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
+import toast from "react-hot-toast";
 
 interface EditorTabProps {
   data: GridValidRowModel[];
@@ -43,7 +44,7 @@ export default function EditorTab({
       (name) => name === queryAfterFrom.split(" ")[1]
     );
     if (tableName === undefined) {
-      // show toast here
+      toast.error('Query not supported!')
       return;
     }
     fetchTableData(tableName);
