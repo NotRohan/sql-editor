@@ -1,20 +1,12 @@
 import { Button } from "@/components/ui/Button";
 import TABLE_NAMES from "@/constants/constants";
-import { getCsvDataByTableName } from "@/data/api";
-import { parseCSVData } from "@/lib/utils";
-import { GridValidRowModel } from "@mui/x-data-grid";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
-interface QueryHistory {
-  query: string;
-  timestamp: Date;
-}
-
 interface HistoryListProps {
-  setData: Dispatch<SetStateAction<GridValidRowModel[]>>;
-  setQueryRuntime: Dispatch<SetStateAction<string>>;
+  isDataLoading: boolean;
   setTabValue: Dispatch<SetStateAction<string>>;
   setEditorValue: Dispatch<SetStateAction<string>>;
+  fetchTableData: (tableName: string) => Promise<void>;
 }
 
 const mockQueryForTables = TABLE_NAMES.map((tableName) => {
@@ -32,24 +24,16 @@ const mockQueries = [
 ];
 
 const HistoryList = ({
-  setData,
+  isDataLoading,
   setEditorValue,
-  setQueryRuntime,
   setTabValue,
+  fetchTableData,
 }: HistoryListProps) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [selectedTableName, setSelectedTableName] = useState("");
 
   const getDataForTableName = async (tableName: string) => {
     setSelectedTableName(tableName);
-    setIsLoading(true);
-    let t0 = performance.now();
-    const response = await getCsvDataByTableName(tableName ?? "");
-    let t1 = performance.now();
-    const parsedData = parseCSVData(atob(response.content.replace("\n", "")));
-    setIsLoading(false);
-    setData(parsedData);
-    setQueryRuntime((t1 - t0).toString());
+    await fetchTableData(tableName)
     setEditorValue(`select * from ${tableName}`);
     setTabValue("Editor");
   };
@@ -58,8 +42,8 @@ const HistoryList = ({
     <div className="flex flex-col rounded-md p-5 overflow-scroll">
       {mockQueries.map((item, index) => (
         <Button
-          isLoading={isLoading && item.tableName === selectedTableName}
-          disabled={isLoading}
+          isLoading={isDataLoading && item.tableName === selectedTableName}
+          disabled={isDataLoading}
           variant="outline"
           onClick={() => getDataForTableName(item.tableName)}
           size="lg"

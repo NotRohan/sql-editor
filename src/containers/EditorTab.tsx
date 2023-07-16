@@ -1,38 +1,40 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/Button";
 import TABLE_NAMES from "@/constants/constants";
-import { getCsvDataByTableName } from "@/data/api";
-import { parseCSVData } from "@/lib/utils";
 import { GridValidRowModel } from "@mui/x-data-grid";
 import AceEditor from "react-ace";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "ace-builds/src-min-noconflict/mode-mysql";
 import "ace-builds/src-noconflict/theme-github";
-import { Copy, PlayCircle, Share2 } from "lucide-react";
+import { Copy, Pencil, PlayCircle, Share2 } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import QueryResult from "./QueryResult";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/DropdownMenu";
 
 interface EditorTabProps {
   data: GridValidRowModel[];
+  isDataLoading: boolean;
   queryRuntime: string;
   editorValue: string;
-  setData: Dispatch<SetStateAction<GridValidRowModel[]>>;
-  setQueryRuntime: Dispatch<SetStateAction<string>>;
   setEditorValue: Dispatch<SetStateAction<string>>;
+  fetchTableData: (tableName: string) => Promise<void>;
 }
 
 export default function EditorTab({
   data,
+  isDataLoading,
   queryRuntime,
   editorValue,
-  setData,
-  setQueryRuntime,
   setEditorValue,
+  fetchTableData,
 }: EditorTabProps) {
-  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
-
-
   const onSubmit = async () => {
     const queryAfterFrom = editorValue
       .toLowerCase()
@@ -40,14 +42,7 @@ export default function EditorTab({
     const tableName = TABLE_NAMES.find(
       (name) => name === queryAfterFrom.split(" ")[1]
     );
-    setIsDataLoading(true);
-    let t0 = performance.now();
-    const response = await getCsvDataByTableName(tableName ?? "");
-    let t1 = performance.now();
-    setIsDataLoading(false);
-    const parsedData = parseCSVData(atob(response.content.replace("\n", "")));
-    setData(parsedData);
-    setQueryRuntime((t1 - t0).toString());
+    fetchTableData(tableName ?? "");
   };
 
   return (
@@ -82,6 +77,21 @@ export default function EditorTab({
           marginBottom: "32px",
         }}
       >
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="mr-3" size="sm">
+              <Pencil className="w-4 h-4 mr-2" />
+              Raw SQL
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>Raw SQL</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Query Builder</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>AI Query Builder</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <Button variant="outline" className="mr-3" size="sm">
           <Copy className="w-4 h-4" />
         </Button>

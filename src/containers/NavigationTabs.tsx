@@ -1,25 +1,37 @@
 "use client";
 
+import { getCsvDataByTableName } from "@/data/api";
+import { parseCSVData } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/Tabs";
 import { GridValidRowModel } from "@mui/x-data-grid";
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import EditorTab from "./EditorTab";
 import HistoryList from "./HistoryList";
 import TableDetails from "./TableDetails";
-import dynamic from 'next/dynamic'
- 
-const DynamicEditor = dynamic(() => import('./EditorTab'), {
-  ssr: false,
-})
-type Props = {};
 
-export default function NavigationTabs({}: Props) {
+const DynamicEditor = dynamic(() => import("./EditorTab"), {
+  ssr: false,
+});
+
+export default function NavigationTabs() {
   const [data, setData] = useState<GridValidRowModel[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
   const [queryRuntime, setQueryRuntime] = useState<string>("");
   const [tabValue, setTabValue] = useState<string>("Editor");
   const [editorValue, setEditorValue] = useState<string>(
     "select * from categories"
   );
+
+  const fetchTableData = async (tableName: string) => {
+    setIsDataLoading(true);
+    let t0 = performance.now();
+    const response = await getCsvDataByTableName(tableName ?? "");
+    let t1 = performance.now();
+    setIsDataLoading(false);
+    const parsedData = parseCSVData(atob(response.content.replace("\n", "")));
+    setData(parsedData);
+    setQueryRuntime((t1 - t0).toString());
+  };
 
   return (
     <Tabs
@@ -41,27 +53,27 @@ export default function NavigationTabs({}: Props) {
       <TabsContent value="Editor">
         <DynamicEditor
           data={data}
+          isDataLoading={isDataLoading}
           queryRuntime={queryRuntime}
           editorValue={editorValue}
-          setData={setData}
-          setQueryRuntime={setQueryRuntime}
           setEditorValue={setEditorValue}
+          fetchTableData={fetchTableData}
         />
       </TabsContent>
       <TabsContent value="Tables">
         <TableDetails
-          setData={setData}
-          setQueryRuntime={setQueryRuntime}
+          isDataLoading={isDataLoading}
           setTabValue={setTabValue}
           setEditorValue={setEditorValue}
+          fetchTableData={fetchTableData}
         />
       </TabsContent>
       <TabsContent value="History">
         <HistoryList
-          setData={setData}
-          setQueryRuntime={setQueryRuntime}
+          isDataLoading={isDataLoading}
           setTabValue={setTabValue}
           setEditorValue={setEditorValue}
+          fetchTableData={fetchTableData}
         />
       </TabsContent>
     </Tabs>
