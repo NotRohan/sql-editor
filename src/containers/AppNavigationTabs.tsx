@@ -13,7 +13,7 @@ const DynamicEditor = dynamic(() => import("./EditorTab"), {
   ssr: false,
 });
 
-export default function NavigationTabs() {
+export default function AppNavigationTabs() {
   const [data, setData] = useState<GridValidRowModel[]>([]);
   const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
   const [queryRuntime, setQueryRuntime] = useState<string>("");
@@ -25,12 +25,16 @@ export default function NavigationTabs() {
   const fetchTableData = async (tableName: string) => {
     setIsDataLoading(true);
     let t0 = performance.now();
-    const response = await getCsvDataByTableName(tableName ?? "");
+    const response = await getCsvDataByTableName(tableName);
+    if (response.error === true) {
+      // show toast here
+      return;
+    }
     let t1 = performance.now();
-    setIsDataLoading(false);
-    const parsedData = parseCSVData(atob(response.content.replace("\n", "")));
+    const parsedData = parseCSVData(atob(response.response.content.replace("\n", "")));
     setData(parsedData);
     setQueryRuntime((t1 - t0).toString());
+    setIsDataLoading(false);
   };
 
   return (

@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import React from "react";
 import { Button } from "@/components/ui/Button";
-import { Download, Timer } from "lucide-react";
 import Table from "@/components/ui/Table";
+import { TABLE_COLUMN_WIDTH } from "@/constants/constants";
 import { GridValidRowModel } from "@mui/x-data-grid";
+import { Download, Timer } from "lucide-react";
 
 interface QueryResultProps {
   data: GridValidRowModel[];
@@ -17,24 +17,20 @@ export default function QueryResult({ data, queryRuntime }: QueryResultProps) {
     return {
       field: column,
       headerName: column,
-      width: 150,
+      width: TABLE_COLUMN_WIDTH,
     };
   });
 
   return (
-    <div
-      style={{ width: "100%", padding: "18px 30px 18px 30px" }}
-      className="bg-slate-100 rounded-md"
-    >
-      <div
-        className="flex justify-between items-center"
-        style={{ marginBottom: "12px" }}
-      >
+    <div className="bg-slate-100 rounded-md w-full px-7 py-7">
+      <div className="flex justify-between items-center mb-3">
         <h2 className="font-extrabold">Result</h2>
         <div className="flex items-center">
           <div className="flex items-center mr-4">
-            <Timer className="w-5 h-5 text-lime-600"/>
-            <span className="text-lime-600"> : {Number(queryRuntime).toFixed(2)}ms</span>
+            <Timer className="w-5 h-5 text-lime-600 mr-[1px] mb-[3px]" />
+            <span className="text-lime-600">
+              : {Number(queryRuntime).toFixed(2)}ms
+            </span>
           </div>
           <Button variant="outline" size="sm">
             <Download className="w-4 h-4" />

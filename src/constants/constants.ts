@@ -12,5 +12,14 @@ const TABLE_NAMES = [
     "territories",
   ];
 
-export default TABLE_NAMES;
+const TABLE_COLUMN_WIDTH = 150;
   
+const QUERIES_HISTORY = TABLE_NAMES.map((tableName) => {
+  return {
+    query: `select * from ${tableName}`,
+    timestamp: new Date(),
+    tableName: tableName,
+  };
+});
+
+export { TABLE_NAMES, TABLE_COLUMN_WIDTH, QUERIES_HISTORY}

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import TABLE_NAMES from "@/constants/constants";
+import { QUERIES_HISTORY, TABLE_NAMES } from "@/constants/constants";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 interface HistoryListProps {
@@ -9,18 +9,10 @@ interface HistoryListProps {
   fetchTableData: (tableName: string) => Promise<void>;
 }
 
-const mockQueryForTables = TABLE_NAMES.map((tableName) => {
-  return {
-    query: `select * from ${tableName}`,
-    timestamp: new Date(),
-    tableName: tableName,
-  };
-});
-
-const mockQueries = [
-  ...mockQueryForTables,
-  ...mockQueryForTables,
-  ...mockQueryForTables,
+const mockQueriesHistory = [
+  ...QUERIES_HISTORY,
+  ...QUERIES_HISTORY,
+  ...QUERIES_HISTORY,
 ];
 
 const HistoryList = ({
@@ -29,7 +21,7 @@ const HistoryList = ({
   setTabValue,
   fetchTableData,
 }: HistoryListProps) => {
-  const [selectedTableName, setSelectedTableName] = useState("");
+  const [selectedTableName, setSelectedTableName] = useState<string>("");
 
   const getDataForTableName = async (tableName: string) => {
     setSelectedTableName(tableName);
@@ -40,7 +32,7 @@ const HistoryList = ({
 
   return (
     <div className="flex flex-col rounded-md p-5 overflow-scroll">
-      {mockQueries.map((item, index) => (
+      {mockQueriesHistory.map((item, index) => (
         <Button
           isLoading={isDataLoading && item.tableName === selectedTableName}
           disabled={isDataLoading}
@@ -51,7 +43,7 @@ const HistoryList = ({
           key={index}
         >
           <div className="w-full flex items-center justify-between">
-            <p className="truncate mr-2">{item.query}</p>
+            <p className="truncate mr-2 text-base">{item.query}</p>
             <p className="text-gray-500 truncate">
               {item.timestamp.toUTCString()}
             </p>

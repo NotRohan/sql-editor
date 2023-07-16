@@ -17,5 +17,6 @@ export const parseCSVData = (csvData: string): CSVRow[] => {
     ...row,
     id: `${index + 1}`,
   }));
-  return structuredData;
+  const slicedData = structuredData.slice(0, -1) 
+  return slicedData;
 };

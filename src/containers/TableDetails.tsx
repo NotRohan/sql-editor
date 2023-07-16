@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import TABLE_NAMES from "@/constants/constants";
+import { TABLE_NAMES } from "@/constants/constants";
 import { Info } from "lucide-react";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
@@ -39,7 +39,7 @@ export default function TableDetails({
             onClick={() => getDataForTableName(tableName)}
             key={tableName}
           >
-            <Info className="absolute right-2 top-2 w-4 h-4" />
+            <Info className="absolute right-2 top-2 w-4 h-4 cursor-help" />
             <span className="font-bold">{tableName}</span>
           </Button>
         );

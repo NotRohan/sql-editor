@@ -9,9 +9,9 @@ const getCsvDataByTableName = async (query: string) => {
       },
     });
     const jsonVal = await response.json();
-    return jsonVal;
+    return {error: false, response: jsonVal};
   } catch (error) {
-    console.log(error);
+    return {error: true, response: error}
   }
 };
 
