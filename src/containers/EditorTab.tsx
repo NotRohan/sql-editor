@@ -80,7 +80,7 @@ export default function EditorTab({
       <div className="w-full flex items-center justify-end mt-4 mb-8">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="mr-3" size="sm">
+            <Button variant="outline" className="mr-3" size="sm" aria-label='edit'>
               <Pencil className="w-4 h-4 md:mr-2" />
               <span className="hidden md:inline">Raw SQL</span>
             </Button>
