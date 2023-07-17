@@ -1,6 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SQL Query Editor
 
-## Getting Started
+## Overview
+
+Web-based application that allows users to interact with databases and execute SQL queries through a user-friendly interface. It provides a convenient way for data analysts to manage and work with databases directly from their web browsers.
+
+![dashboard](public/dashboard.png)
+
+## Visit App
+
+[https://sql-editor-three.vercel.app/](https://sql-editor-three.vercel.app/)
+
+## Tech Stack
+
+- <b>Next.js</b>: React Framework for the application
+- <b>Tailwind</b>: CSS Framework
+- <b>Typescript</b>: For a better Developing experience
+
+## Packages Used
+
+- <b>@mui/x-data-grid</b>: Fast and extendable react data table and react data grid
+- <b>@radix-ui/react-dropdown-menu</b>: Displays a menu to the user
+- <b>@radix-ui/react-tabs</b>: Displays tab panels to the user
+- <b>class-variance-authority</b>: For Creating variants of a UI component
+- <b>clsx</b>: Utility for constructing className strings conditionally
+- <b>lucide-react</b>: Icon library for react applications
+- <b>papaparse</b>: CSV parser for the browser
+- <b>react-ace</b>: React component for SQL Editor
+- <b>react-hot-toast</b>: Notification toasts
+- <b>tailwind-merge</b>: Utility function to efficiently merge Tailwind CSS classes in JS without style conflicts.
+
+## Predefined SQL Queries
+
+- `select * from customers`
+- `select * from categories`
+- `select * from employee_territories`
+- `select * from order_details`
+- `select * from orders`
+- `select * from products`
+- `select * from regions`
+- `select * from shippers`
+- `select * from suppliers`
+- `select * from territories`
+
+## Website Performance
+
+Perfect Lighthouse Score for both Desktop and Mobile
+![lighthouse](public/perfect_lighthouse.png)
+
+### Average Page Load time calculated using Lighthouse
+
+Desktop: <b>0.4s</b>
+
+Mobile: <b>1.4s</b>
+
+### Average Page Load time calculated using SpeedLab
+
+Desktop: <b>0.4s</b>
+
+Mobile: <b>1.2s</b>
+
+## Setting up Development Environment
 
 First, run the development server:
 
@@ -12,23 +71,4 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000) within your browser to see the result.
